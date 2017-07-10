@@ -1,9 +1,9 @@
 name: Draft theme
 type: theme
+hidden: true
 description: 'Lemberg Draft theme'
 core: 8.x
 base theme: classy
-hidden: true
 
 regions:
   header: Header
