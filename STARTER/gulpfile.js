@@ -33,7 +33,7 @@ let includePaths = [
   // Add paths to any sass @imports that you will use from bower_components here
   // Adding paths.bowerDir will allow you to target any bower package folder as an include path
   // for generically named assets
-  paths.bowerDir + '/foundation-sites/scss',
+  paths.npmDir + '/foundation-sites/scss',
 ];
 
 let sassdocSrc = [
@@ -41,6 +41,11 @@ let sassdocSrc = [
 ];
 
 let scriptsSrc = [
+  // add npm components scripts here
+  paths.npmDir + '/svg-injector/svg-injector.js',
+  paths.npmDir + '/foundation-sites/js/foundation.core.js',
+  paths.npmDir + '/foundation-sites/js/foundation.util.mediaQuery.js',
+
   './js/src/*.js'
 ];
 
@@ -82,6 +87,25 @@ gulp.task('styles', () => {
     }))
     .pipe(gulp.dest('./css/'))
 });
+gulp.task('wysiwyg', function() {
+  gulp.src('./scss/wysiwyg.scss')
+    .pipe(sass({
+      includePaths: includePaths
+    }))
+    // Catch any SCSS errors and prevent them from crashing gulp
+    .on('error', function (error) {
+      console.error('>>> ERROR', error);
+      notify().write(error);
+      this.emit('end');
+    })
+    .pipe(autoprefixer(['last 2 versions']))
+    .pipe(concat('wysiwyg.css'))
+    .pipe(cleanCss({
+      // turn off minifyCss sourcemaps so they don't conflict with gulp-sourcemaps and includePaths
+      sourceMap: false
+    }))
+    .pipe(gulp.dest('./css/dist/'))
+});
 
 
 // JS tasks
@@ -91,10 +115,9 @@ gulp.task('js-lint', () => {
     .pipe(jshint.reporter(jshintStylish))
     // Use gulp-notify as jshint reporter
     .pipe(notify(function (file) {
-      if (file.jshint.success) {
-        // Don't show something if success
-        return false;
-      }
+      if (!file.jshint) return false;
+      // Don't show something if success
+      if (file.jshint.success) return false;
 
       var errors = file.jshint.results.map(function (data) {
         if (data.error) {
@@ -115,7 +138,7 @@ gulp.task('scripts', () => {
       notify().write(error);
       this.emit('end');
     })
-    .pipe(concat('themekit.js'))
+    .pipe(concat('draft.js'))
     .pipe(sourcemaps.write())
     .pipe(gulp.dest('./js/dist/'))
     .pipe(uglify())
@@ -131,6 +154,7 @@ gulp.task('watch', () => {
   watch(sassdocSrc, () => {
     gulp.start('scss-lint');
     gulp.start('styles');
+    gulp.start('wysiwyg');
   });
 
   watch(scriptsSrc, () => {

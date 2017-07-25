@@ -3,4 +3,4 @@
 /**
  * Implements template_preprocess_field().
  */
-function STARTER_preprocess_field(&$variables, $hook) {}
+function STARTER_preprocess_field(&$variables) {}

@@ -4,7 +4,7 @@
  * Use svg-injector.js to replace an svg <img> tag with the inline svg.
  */
 
-!function($){
+(function($, document){
   "use strict";
 
   $(() => {
@@ -12,7 +12,9 @@
     let mySVGsToInject = document.querySelectorAll('img.inject-me');
 
     // Do the injection
-    SVGInjector(mySVGsToInject);
+    /* global SVGInjector */
+    new SVGInjector(mySVGsToInject);
   });
 
-}(jQuery);
+})(jQuery, document);
+

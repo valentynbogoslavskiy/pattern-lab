@@ -11,8 +11,3 @@ function STARTER_preprocess_node (&$variables) {
     $function($variables);
   }
 }
-
-/**
- * Implements template_preprocess_node_article().
- */
-function STARTER_preprocess_node_article (&$variables) {}
