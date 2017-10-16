@@ -1,0 +1,26 @@
+name: STARTER
+type: theme
+description: 'A subtheme of Classy, built for STARTER'
+core: 8.x
+# Defines the base theme
+base theme: classy
+
+ckeditor_stylesheets:
+  - css/dist/wysiwyg.css
+
+libraries:
+  - STARTER/global
+
+
+libraries-override:
+  classy/base:
+    css:
+      component:
+        css/components/menu.css: false
+
+regions:
+  header: Header
+  highlighted: Highlighted
+  content: Content
+  sidebar: Sidebar
+  footer: Footer

@@ -1,0 +1,10 @@
+global:
+  version: VERSION
+  css:
+    theme:
+      css/style.css: {}
+  js:
+    js/dist/draft.js: {}
+  dependencies:
+    - core/drupal
+    - core/jquery
