@@ -41,6 +41,5 @@ matrix:
         - npm install
         # Download Drupal ESLint configuration.
         - wget http://cgit.drupalcode.org/drupal/plain/core/.eslintrc.json?h=8.4.x -O .eslintrc.json
-        - wget http://cgit.drupalcode.org/drupal/plain/core/.eslintignore?h=8.4.x -O .eslintignore
       script:
         - npm run lint:js

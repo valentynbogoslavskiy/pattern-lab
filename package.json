@@ -10,7 +10,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "lint:js": "node ./node_modules/eslint/bin/eslint.js --ext=.js ./js || exit 0"
+    "lint:js": "node ./node_modules/eslint/bin/eslint.js --ext=.js . || exit 0"
   },
   "devDependencies": {
     "eslint": "3.19.0",
