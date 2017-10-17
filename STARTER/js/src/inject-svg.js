@@ -4,17 +4,12 @@
  * Use svg-injector.js to replace an svg <img> tag with the inline svg.
  */
 
-(function($, document){
-  "use strict";
-
+(function ($, document) {
   $(() => {
-    // Elements to inject
-    let mySVGsToInject = document.querySelectorAll('img.inject-me');
+    // Elements to inject.
+    const mySVGsToInject = document.querySelectorAll('img.inject-me');
 
-    // Do the injection
-    /* global SVGInjector */
-    new SVGInjector(mySVGsToInject);
+    // Do the injection.
+    SVGInjector(mySVGsToInject);
   });
-
-})(jQuery, document);
-
+}(jQuery, document));
