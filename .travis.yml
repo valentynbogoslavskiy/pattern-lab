@@ -27,9 +27,9 @@ install:
 script:
   - composer validate --no-check-all --ansi
   # Check Drupal coding standards.
-  - phpcs --standard=Drupal --colors --ignore=*/css/* .
+  - phpcs --standard=Drupal --colors --ignore=*/css/*,*/vendor/* .
   # Check Drupal best practices.
-  - phpcs --standard=DrupalPractice --colors --ignore=*/css/* .
+  - phpcs --standard=DrupalPractice --colors --ignore=*/css/*,*/vendor/* .
 
 matrix:
   fast_finish: true
