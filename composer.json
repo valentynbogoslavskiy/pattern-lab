@@ -1,0 +1,8 @@
+{
+    "name": "lemberg/draft-theme",
+    "description": "Draft theme for Drupal",
+    "type": "drupal-theme",
+    "license": "GPL-2.0+",
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

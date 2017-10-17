@@ -1,2 +1,5 @@
 node_modules
 *.map
+
+# Ignore Composer vendor packages.
+vendor/
