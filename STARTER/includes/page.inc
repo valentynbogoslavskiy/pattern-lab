@@ -1,6 +1,13 @@
 <?php
 
 /**
- * Implements template_preprocess_page().
+ * @file
+ * Contains page related preprocess routines.
  */
-function STARTER_preprocess_page (&$variables) {}
+
+/**
+ * Implements hook_preprocess_page().
+ */
+function STARTER_preprocess_page(&$variables) {
+
+}

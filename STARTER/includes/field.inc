@@ -1,6 +1,13 @@
 <?php
 
 /**
- * Implements template_preprocess_field().
+ * @file
+ * Contains field related preprocess routines.
  */
-function STARTER_preprocess_field(&$variables) {}
+
+/**
+ * Implements hook_preprocess_field().
+ */
+function STARTER_preprocess_field(&$variables) {
+
+}

@@ -1,6 +1,13 @@
 <?php
 
 /**
- * Implements template_preprocess_paragraph().
+ * @file
+ * Contains paragraphs related preprocess routines.
  */
-function STARTER_preprocess_paragraph (&$variables) {}
+
+/**
+ * Implements hook_preprocess_paragraph().
+ */
+function STARTER_preprocess_paragraph(&$variables) {
+
+}

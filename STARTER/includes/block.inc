@@ -1,6 +1,13 @@
 <?php
 
 /**
- * Implements hook_preprocess_block()
+ * @file
+ * Contains block related preprocess routines.
  */
-function STARTER_preprocess_block(&$variables) {}
+
+/**
+ * Implements hook_preprocess_block().
+ */
+function STARTER_preprocess_block(&$variables) {
+
+}

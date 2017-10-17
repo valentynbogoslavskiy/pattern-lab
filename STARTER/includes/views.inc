@@ -1,6 +1,13 @@
 <?php
 
 /**
- * Implements template_preprocess_views_view().
+ * @file
+ * Contains views related preprocess routines.
  */
-function STARTER_preprocess_views_view(&$variables) {}
+
+/**
+ * Implements hook_preprocess_views_view().
+ */
+function STARTER_preprocess_views_view(&$variables) {
+
+}

@@ -1,3 +1,3 @@
-## Draft Theme 1.x.x, 2017-05-07
+## Draft Theme 1.x.x
 
 - Initial release, nothing fancy
