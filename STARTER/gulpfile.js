@@ -9,6 +9,7 @@ const notify = require("gulp-notify");
 const watch = require('gulp-watch');
 const concat = require('gulp-concat');
 const rename = require('gulp-rename');
+const icomoonBuilder = require('gulp-icomoon-builder');
 // SASS
 const sass = require('gulp-sass');
 const sassLint = require('gulp-sass-lint');
@@ -54,6 +55,26 @@ let scriptsSrc = [
 /************************
  * TASKS
  ************************/
+
+/************************
+ * BUILD FONTS
+ ************************/
+gulp.task('build-fonts', () => {
+  gulp.src(configs.icomoon)
+    .pipe(icomoonBuilder({
+      templateType: 'map',
+    }))
+    .on('error', function (error) {
+      console.log(error);
+      notify().write(error);
+    })
+
+    .pipe(gulp.dest('scss/base'))
+    .on('error', function (error) {
+      console.log(error);
+      notify().write(error);
+    });
+});
 
 // SCSS tasks
 gulp.task('scss-lint', () => {
