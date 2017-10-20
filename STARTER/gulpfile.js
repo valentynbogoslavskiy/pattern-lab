@@ -50,6 +50,10 @@ let scriptsSrc = [
   './js/src/*.js'
 ];
 
+const configs = {
+  icomoon: '/fonts/icomoon/selection.json',
+}
+
 
 
 /************************
