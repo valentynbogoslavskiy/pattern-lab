@@ -41,7 +41,6 @@ function draft_theme_preprocess_views_view_unformatted(&$variables) {
 
 /**
  * Implements hook_preprocess_input().
- *
  */
 function draft_theme_preprocess_input(&$variables) {
   // Use <button> element instead of <input type="submit" />
