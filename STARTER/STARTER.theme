@@ -2,56 +2,5 @@
 
 /**
  * @file
- * STARTER Drupal 8 theme based on Draft theme.
+ * Functions to support theming in the STARTER theme.
  */
-
-use Drupal\file\Entity\File;
-use Drupal\image\Entity\ImageStyle;
-
-/**
- * Utility function to get the inline css style for a background image.
- *
- * @param mixed $entity
- *   Entity containing the image field.
- * @param string $field_name
- *   Name of the image field to use.
- * @param string $image_style
- *   Name of the image style to use.
- *
- * @return string
- *   Full css style attribute containing background image.
- */
-function _get_entity_image_inline_style($entity, $field_name, $image_style) {
-  $rendered_style = '';
-
-  if (!$entity->$field_name->isEmpty()) {
-    $file_entity = $entity->get($field_name)->entity->get('field_image')->entity;
-    if ($url = _get_image_style_url($file_entity, $image_style)) {
-      $rendered_style = 'style="background-image: url(' . $url . ');"';
-    }
-  }
-
-  return $rendered_style;
-}
-
-/**
- * Get the url for a specific image style of an image.
- *
- * @param \Drupal\file\Entity\File $file
- *   Image to be used.
- * @param string $image_style
- *   Name of the image style to use.
- *
- * @return string
- *   Url.
- */
-function _get_image_style_url(File $file, $image_style) {
-  $uri = $file->getFileUri();
-  if ($image_style) {
-    $url = ImageStyle::load($image_style)->buildUrl($uri);
-  }
-  else {
-    $url = file_create_url($uri);
-  }
-  return $url;
-}
