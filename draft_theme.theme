@@ -26,15 +26,3 @@ function draft_theme_suggestions_form_element(array $variables) {
 
   return $suggestions;
 }
-
-/**
- * Implements hook_preprocess_views_view_unformatted().
- *
- */
-function draft_theme_preprocess_views_view_unformatted(&$variables) {
-//  Example: How set class for row.
-//  if (($node = \Drupal::routeMatch()->getParameter('node')) && $node->bundle() === 'page') {
-//    $variables['row_class'] = 'small-6';
-//  }
-
-}
