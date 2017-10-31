@@ -40,8 +40,16 @@ matrix:
         - npm install -g npm@5
 
       install:
-        # Build the code base.
+        # Build Draft theme code base.
+        - npm install
+        # Build STARTER code base.
+        - cd STARTER
         - npm install
 
       script:
+        # ESLint Draft theme.
+        - cd ..
+        - npm run lint:js
+        # ESLint STARTER.
+        - cd STARTER
         - npm run lint:js
