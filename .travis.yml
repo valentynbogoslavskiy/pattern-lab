@@ -34,6 +34,7 @@ matrix:
       cache:
         directories:
           - "node_modules"
+          - "STARTER/node_modules"
       node_js: 6
 
       before_install:
@@ -43,13 +44,10 @@ matrix:
         # Build Draft theme code base.
         - npm install
         # Build STARTER code base.
-        - cd STARTER
-        - npm install
+        - cd STARTER && npm install
 
       script:
         # ESLint Draft theme.
-        - cd ..
-        - npm run lint:js
+        - cd .. && npm run lint:js
         # ESLint STARTER.
-        - cd STARTER
-        - npm run lint:js
+        - cd STARTER && npm run lint:js
