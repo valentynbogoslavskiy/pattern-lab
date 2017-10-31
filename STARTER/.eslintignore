@@ -1,0 +1,5 @@
+# Ignore node modules.
+node_modules/*
+
+# Ignore STARTER (it should run own check).
+/js/dist/*

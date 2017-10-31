@@ -18,8 +18,7 @@ const autoprefixer = require('gulp-autoprefixer');
 // JS
 const babel = require('gulp-babel');
 const uglify = require('gulp-uglify');
-const jshint = require('gulp-jshint'); // doc - http://jshint.com/docs/options/
-const jshintStylish = require('jshint-stylish');
+const eslint = require('gulp-eslint');
 
 /************************
  * CONFIGURATION
@@ -84,7 +83,7 @@ gulp.task('build-fonts', () => {
 gulp.task('scss-lint', () => {
   gulp.src('scss/**/*.s+(a|c)ss')
     .pipe(sassLint())
-    .pipe(sassLint.format(notify()))
+    .pipe(sassLint.format())
 });
 gulp.task('styles', () => {
   gulp.src(sassdocSrc)
@@ -135,23 +134,23 @@ gulp.task('wysiwyg', function() {
 
 // JS tasks
 gulp.task('js-lint', () => {
-  return gulp.src(scriptsSrc)
-    .pipe(jshint())
-    .pipe(jshint.reporter(jshintStylish))
-    // Use gulp-notify as jshint reporter
-    .pipe(notify(function (file) {
-      if (!file.jshint) return false;
-      // Don't show something if success
-      if (file.jshint.success) return false;
-
-      var errors = file.jshint.results.map(function (data) {
-        if (data.error) {
-          return "(" + data.error.line + ':' + data.error.character + ') ' + data.error.reason;
-        }
-      }).join("\n");
-      return file.relative + " (" + file.jshint.results.length + " errors)\n" + errors;
-    }));
+    // ESLint ignores files with "node_modules" paths.
+    // So, it's best to have gulp ignore the directory as well.
+    // Also, Be sure to return the stream from the task;
+    // Otherwise, the task may end before the stream has finished.
+    return gulp.src(['./js/src/*.js'])
+        // eslint() attaches the lint output to the "eslint" property
+        // of the file object so it can be used by other modules.
+        .pipe(eslint())
+        // eslint.format() outputs the lint results to the console.
+        // Alternatively use eslint.formatEach() (see Docs).
+        .pipe(eslint.format())
+        .on('error', notify.onError({ message: 'There is a JS error, please look the console for details'}))
+        // To have the process exit with an error code (1) on
+        // lint error, return the stream and pipe to failAfterError last.
+        .pipe(eslint.failAfterError());
 });
+
 gulp.task('scripts', () => {
   gulp.src(scriptsSrc)
     .pipe(sourcemaps.init())

@@ -1,0 +1,55 @@
+matrix:
+  include:
+    - sudo: required
+      dist: trusty
+      language: php
+      cache:
+        apt: true
+        directories:
+          - "$HOME/.composer/cache"
+          - "$HOME/.drush/cache"
+      php: 7.1
+
+      before_install:
+        - phpenv config-rm xdebug.ini
+        - composer self-update
+        - composer --version
+
+      install:
+        # Build the code base.
+        - composer install --no-interaction --no-progress --no-suggest
+        # Add Composer's local bin directory to the PATH.
+        - export PATH="$HOME/.composer/vendor/bin:$TRAVIS_BUILD_DIR/vendor/bin:$PATH"
+        # Register the Drupal and DrupalPractice Standard with PHPCS.
+        - phpcs --config-set installed_paths $TRAVIS_BUILD_DIR/vendor/drupal/coder/coder_sniffer
+
+      script:
+        - composer validate --no-check-all --ansi
+        # Check Drupal coding standards and best practices.
+        - phpcs --standard=Drupal,DrupalPractice --colors --ignore=*/css/*,*/fonts/*,*/vendor/* .
+
+    - sudo: required
+      dist: trusty
+      language: node_js
+      cache:
+        directories:
+          - "node_modules"
+          - "STARTER/node_modules"
+      node_js: 6
+
+      before_install:
+        - npm install -g npm@5
+
+      install:
+        # Build Draft theme code base.
+        - npm install
+        # Build STARTER code base.
+        - cd STARTER && npm install
+
+      script:
+        # ESLint Draft theme.
+        - cd .. && npm run lint:js
+        # ESLint STARTER.
+        - cd STARTER && npm run lint:js
+        # Ensure that Gulp works.
+        - node ./node_modules/gulp/bin/gulp.js
