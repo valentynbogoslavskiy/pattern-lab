@@ -26,7 +26,7 @@ matrix:
       script:
         - composer validate --no-check-all --ansi
         # Check Drupal coding standards and best practices.
-        - phpcs --standard=Drupal,DrupalPractice --colors --ignore=*/css/*,*/vendor/* .
+        - phpcs --standard=Drupal,DrupalPractice --colors --ignore=*/css/*,*/fonts/*,*/vendor/* .
 
     - sudo: required
       dist: trusty

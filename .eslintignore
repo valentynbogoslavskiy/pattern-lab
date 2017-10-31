@@ -3,3 +3,6 @@ node_modules/*
 
 # Ignore compiled code.
 STARTER/js/dist/*
+
+# Ignore fonts.
+STARTER/fonts/*
