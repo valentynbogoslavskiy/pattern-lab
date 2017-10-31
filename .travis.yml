@@ -51,3 +51,5 @@ matrix:
         - cd .. && npm run lint:js
         # ESLint STARTER.
         - cd STARTER && npm run lint:js
+        # Ensure that Gulp works.
+        - node ./node_modules/gulp/bin/gulp.js
