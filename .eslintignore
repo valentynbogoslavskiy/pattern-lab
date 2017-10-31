@@ -1,8 +1,5 @@
 # Ignore node modules.
 node_modules/*
 
-# Ignore compiled code.
-STARTER/js/dist/*
-
-# Ignore fonts.
-STARTER/fonts/*
+# Ignore STARTER (it should run own check).
+STARTER/*
