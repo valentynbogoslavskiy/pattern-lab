@@ -8,8 +8,6 @@
  * to include this in the `theme.js` file first, as well as Foundation component files.
  */
 
-import $ from 'jquery';
-
 import { Foundation } from 'foundation-sites/js/foundation.core';
 import { rtl, GetYoDigits, transitionend } from 'foundation-sites/js/foundation.util.core';
 import { Box } from 'foundation-sites/js/foundation.util.box';
@@ -20,9 +18,9 @@ import { Motion, Move } from 'foundation-sites/js/foundation.util.motion';
 import { Nest } from 'foundation-sites/js/foundation.util.nest';
 import { Timer } from 'foundation-sites/js/foundation.util.timer';
 
-window.$ = $;
+window.$ = jQuery;
 
-Foundation.addToJquery($);
+Foundation.addToJquery(jQuery);
 
 // Add Foundation Utils to Foundation global namespace for backwards
 // compatibility.
@@ -41,4 +39,4 @@ Foundation.Timer = Timer;
 
 // Initializing foundation - if you are relying on components generated from classes or attributes,
 // you may need to make sure to appropriate modules are included beforehand
-$(document).foundation();
+jQuery(document).foundation();

@@ -6,5 +6,6 @@
 *.sass-cache
 *.map
 
-# JS compiled files #
+# Compiled files #
 /js/dist/*
+/css/*

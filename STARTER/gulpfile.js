@@ -45,9 +45,12 @@ const lintSass = (files) => {
         configs.notifier.sassLint(file.sassLint);
       }
       cb();
-    }))
-    .pipe(process.env.NODE_ENV && process.env.NODE_ENV === 'test' ? sassLint.failOnError() : gutil.noop());
+    }));
 };
+
+gulp.task('scss-lint', () => {
+  lintSass(configs.sassFiles);
+});
 
 gulp.task('scss-compile', () => {
   gulp.src(configs.sassFiles)
@@ -84,9 +87,12 @@ const lintJs = (files) => {
       }
       cb();
     }))
-    .pipe(process.env.NODE_ENV && process.env.NODE_ENV === 'test' ? eslint.failAfterError() : gutil.noop());
+    .pipe((configs.testEnv()) ? eslint.failAfterError() : gutil.noop());
 };
 
+gulp.task('js-lint', () => {
+  lintJs(configs.allScripts);
+});
 
 /**
  * JS Standalone scripts compile.
@@ -134,14 +140,6 @@ gulp.task('js-bundle', () => {
       },
     }))
     .pipe(webpackStream(configs.webpack.bundle, webpack))
-    .on('error', function handleError() {
-      if (process.env.NODE_ENV && process.env.NODE_ENV === 'test') {
-        process.exit.bind(process, 1);
-      }
-      else {
-        this.emit('end');
-      }
-    })
     .pipe(gulp.dest(configs.scriptsDist));
 });
 gulp.task('js-standalone', (done) => {
@@ -174,10 +172,8 @@ gulp.task('build-fonts', () => {
  * TEST
  */
 gulp.task('test', () => {
-  process.env.NODE_ENV = 'test';
-
+  //process.env.NODE_ENV = 'test';
   gulp.start('scss-lint');
-
   gulp.start('scss-compile');
   gulp.start('js-lint');
   gulp.start('js-bundle');

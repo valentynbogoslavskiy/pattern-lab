@@ -49,7 +49,8 @@ matrix:
       script:
         # ESLint Draft theme.
         - cd .. && npm run lint:js
-        # ESLint STARTER.
+        # Testing STARTER.
         - cd STARTER && npm run lint:js
-        # Ensure that Gulp works.
-        - node ./node_modules/gulp/bin/gulp.js
+        - npm run build:js
+        - npm run lint:scss
+        - npm run build:scss

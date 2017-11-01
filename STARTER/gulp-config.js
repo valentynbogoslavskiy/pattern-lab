@@ -1,6 +1,7 @@
 const notifier = require('node-notifier');
 const path = require('path');
 const webpackConfigs = require('./webpack.config');
+const eslint = require('gulp-eslint');
 
 function _getShortPath(pathArray, folder) {
   const folders = [];
@@ -36,6 +37,10 @@ const gulpConfigs = {
     bundle: 'bundle.js',
     standalone: '[name]',
   },
+
+  testEnv: () => {
+    return !!(process.env.NODE_ENV && process.env.NODE_ENV.trim() === 'test');
+  },
 };
 
 gulpConfigs.sassIncludePaths = [`${gulpConfigs.npmDir}/foundation-sites/scss`];
@@ -63,19 +68,22 @@ gulpConfigs.notifier = {
       message += `${mes.line}:${mes.column} ${mes.severity === 2 ? 'error' : 'warning'} ${mes.ruleId}\r\n`;
     }
 
-    notifier.notify({
-      title: `SCSS (${errors.join(', ')})`,
-      message,
-      wait: true,
-      sound: false,
-    });
+    if (gulpConfigs.testEnv()) {
+      process.exit(1);
+    } else {
+      notifier.notify({
+        title: `SCSS (${errors.join(', ')})`,
+        message,
+        wait: true,
+        sound: false,
+      });
 
-    notifier.on('click', () => false);
+      notifier.on('click', () => false);
+    }
   },
   esLint: (esLint) => {
     const lint = esLint;
     if (!(lint.errorCount > 0 || lint.warningCount > 0)) return false;
-
     const shortPath = _getShortPath(lint.filePath.split(path.sep), path.basename(__dirname));
 
     const errors = [];
@@ -91,23 +99,25 @@ gulpConfigs.notifier = {
       message += `${mes.line}:${mes.column} ${mes.severity === 2 ? 'error' : 'warning'} ${mes.ruleId}\r\n`;
     }
 
-    notifier.notify({
-      title: `JS (${errors.join(', ')})`,
-      message,
-      wait: true,
-      sound: false,
-    });
+    if (!gulpConfigs.testEnv()) {
+      console.log(234234324);
+      notifier.notify({
+        title: `JS (${errors.join(', ')})`,
+        message,
+        wait: true,
+        sound: false,
+      });
 
-    notifier.on('click', () => false);
+      notifier.on('click', () => false);
+    }
   },
   errorHandler: (error, notifyTitle = 'Error occurred') => {
     const err = (error.message) ? error.message : error;
-    console.error('>>> ERROR', err);
 
-    if (process.env.NODE_ENV && process.env.NODE_ENV === 'test') {
-      process.exit.bind(process, 1);
-    }
-    else {
+    if (gulpConfigs.testEnv()) {
+      console.error(`>>> ${error.name}\r\n${(error.messageFormatted) ? error.messageFormatted : err}`);
+      process.exit(1);
+    } else {
       notifier.notify({
         title: notifyTitle,
         message: err,
