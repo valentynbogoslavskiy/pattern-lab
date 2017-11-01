@@ -16,8 +16,7 @@
     "matchMedia": true,
     "Backbone": true,
     "Modernizr": true,
-    "CKEDITOR": true,
-    "SVGInjector": true
+    "CKEDITOR": true
   },
   "rules": {
     "consistent-return": [0],
