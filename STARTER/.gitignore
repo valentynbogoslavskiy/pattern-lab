@@ -1,7 +1,10 @@
 # Node modules #
-node_modules
-bower_components
+/node_modules/*
+/bower_components/*
 
 # Numerous always-ignore extensions #
 *.sass-cache
 *.map
+
+# JS compiled files #
+/js/dist/*

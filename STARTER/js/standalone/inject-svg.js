@@ -3,6 +3,8 @@
  * Replaces references to SVG files with full SVG markup inline.
  */
 
+import SVGInjector from 'svg-injector';
+
 (function svgInjector($, Drupal, SvgInjector) {
   /**
    * Replaces images with src or data-src attribute with full SVG markup inline.
