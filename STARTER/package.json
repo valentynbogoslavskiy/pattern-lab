@@ -10,11 +10,11 @@
   "version": "1.0.0-alpha",
   "license": "MIT",
   "scripts": {
-    "test": "gulp test",
-    "lint:js": "gulp js-lint",
-    "build:js": "gulp js-bundle && gulp js-standalone",
-    "lint:scss": "gulp scss-lint",
-    "build:scss": "gulp scss-compile"
+    "test": "node ./node_modules/gulp/bin/gulp.js test || exit 0",
+    "lint:js": "node ./node_modules/gulp/bin/gulp.js js-lint || exit 0",
+    "build:js": "node ./node_modules/gulp/bin/gulp.js js-bundle && node ./node_modules/gulp/bin/gulp.js js-standalone || exit 0",
+    "lint:scss": "node ./node_modules/gulp/bin/gulp.js scss-lint || exit 0",
+    "build:scss": "node ./node_modules/gulp/bin/gulp.js scss-compile || exit 0"
   },
   "devDependencies": {},
   "dependencies": {
