@@ -1,0 +1,115 @@
+////
+/// Framework - Layouts
+////
+
+@mixin container($width: 'default') {
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  padding-left: 24px;
+  padding-right: 24px;
+  max-width: $global-width;
+
+  @if $width == 'default' {
+    @include breakpoint(large) {
+      padding-left: 45px;
+      padding-right: 45px;
+    }
+  } @else if $width == 'narrow' {
+    @include breakpoint(large) {
+      padding-left: 100px;
+      padding-right: 100px;
+    }
+    @include breakpoint(xlarge) {
+      padding-left: 165px;
+      padding-right: 165px;
+    }
+  }
+}
+
+////
+/// @group grid
+////
+
+/// Sizes child elements so that `$n` number of items appear on each row.
+///
+/// @param {Number} $n - Number of elements to display per row.
+/// @param {String} $selector ['.column'] - Selector(s) to use for child elements.
+/// @param {Number|List} $gutter
+///   The gutter to apply to child elements. Accepts multiple values:
+///   - $grid-column-gutter will use the values in the $grid-column-gutter map, including breakpoint sizes.
+///   - A fixed numeric value will apply this gutter to all breakpoints.
+@mixin grid-layout(
+  $n,
+  $selector: '.column',
+  $gutter: null
+) {
+  display: flex;
+  flex-wrap: wrap;
+  & > #{$selector} {
+    width: percentage(1 / $n);
+
+    // If a $gutter value is passed
+    @if ($gutter) {
+      // Gutters
+      @if type-of($gutter) == 'map' {
+        @each $breakpoint, $value in $gutter {
+          $padding: rem-calc($value) / 2;
+
+          @include breakpoint($breakpoint) {
+            padding: $padding;
+          }
+        }
+      } @else if type-of($gutter) == 'number' and strip-unit($gutter) > 0 {
+        $padding: rem-calc($gutter) / 2;
+        padding: $padding;
+      }
+    }
+
+    &:nth-of-type(1n) {
+      clear: none;
+    }
+
+    &:nth-of-type(#{$n}n+1) {
+      clear: both;
+    }
+
+    &:last-child {
+      float: $global-left;
+    }
+  }
+
+  @if ($gutter) {
+    // Gutters
+    @if type-of($gutter) == 'map' {
+      @each $breakpoint, $value in $gutter {
+        $padding: rem-calc($value) / 2;
+
+        @include breakpoint($breakpoint) {
+          margin-left: -$padding;
+          margin-right: -$padding;
+        }
+      }
+    } @else if type-of($gutter) == 'number' and strip-unit($gutter) > 0 {
+      $padding: rem-calc($gutter) / 2;
+      margin-left: -$padding;
+      margin-right: -$padding;
+    }
+  }
+}
+
+@mixin image-crop-height($height) {
+  position: relative;
+  width: 100%;
+  height: rem-calc($height);
+  overflow: hidden;
+
+  img {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    height: auto;
+    width: 100%;
+    transform: translate(-50%, -50%);
+  }
+}

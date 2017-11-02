@@ -1,0 +1,46 @@
+.form-item {
+  margin-bottom: 20px;
+
+  label, .description {
+    display: block;
+    line-height: 1;
+    color: $white;
+  }
+
+  label {
+    padding: 8px 10px;
+    font-size: rem-calc(14);
+
+    &.form-required {
+      &:after {
+        content: '*';
+      }
+    }
+  }
+
+  .description {
+    font-size: rem-calc(12);
+    padding: 4px 10px;
+  }
+}
+
+@include selectors('form-inputs') {
+  border: 0;
+  width: 100%;
+  font-size: rem-calc(16);
+  line-height: rem-calc(20);
+  padding: 10px;
+  color: rgba($font-color-dark, .63);
+  transition: color .2s linear;
+  border-radius: 2px;
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 2px 4px rgba($black, .21);
+    color: $font-color-dark;
+  }
+
+  &:-webkit-autofill {
+    box-shadow: 0 0 0 30px $white inset;
+  }
+}

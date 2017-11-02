@@ -1,0 +1,81 @@
+////
+/// Basic Typography Sytyles
+/// (Also included in WYSIWYG)
+////
+
+body {
+  overflow-x: hidden;
+  font-size: rem-calc(14);
+  line-height: 1.4;
+
+  @include breakpoint(large) {
+    font-size: rem-calc(16);
+  }
+}
+
+.embedded-entity {
+  &:not(:last-child) {
+    margin-bottom: $global-margin;
+  }
+
+  &.caption {
+    display: block;
+    width: 100%;
+
+    > figcaption {
+      display: block;
+      letter-spacing: $global-letter-spacing;
+      padding: $global-padding / 2 0;
+      font-size: $small-font-size;
+      line-height: 1.5;
+    }
+  }
+
+  .media-image {
+    &, img {
+      width: 100%;
+    }
+  }
+
+  @include breakpoint(medium) {
+    &:not(:first-child) {
+      margin-top: $global-margin * 2.5;
+    }
+  }
+}
+
+h1 {
+  color: $white;
+}
+
+h2 {
+  color: $primary-color;
+}
+.h2 {
+  font-family: $body-font-family;
+  line-height: 1.1;
+
+  p {
+    line-height: inherit;
+    font-weight: inherit;
+  }
+
+  @include breakpoint(small down) {
+    font-size: rem-calc(16);
+  }
+}
+
+h3 {
+  color: $secondary-color;
+  font-family: $body-font-family;
+}
+
+h6 {
+  text-transform: uppercase;
+  font-family: $body-font-family;
+}
+
+.subheading {
+  font-family: $header-font-family;
+  color: $secondary-color;
+}
