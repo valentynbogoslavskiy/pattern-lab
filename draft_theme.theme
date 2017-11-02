@@ -2,40 +2,87 @@
 
 /**
  * @file
- * Draft theme.
+ * Functions to support theming in the Draft theme.
  */
+
+use Drupal\Core\Entity\ContentEntityInterface;
+use Drupal\file\FileInterface;
+use Drupal\image\Entity\ImageStyle;
 
 /**
- * Implements hook_theme_suggestions_alter
+ * Implements hook_theme_suggestions_HOOK_alter() for form().
  */
-function draft_theme_theme_suggestions_alter(array &$suggestions, array $variables) {
-  if (isset($variables['element']) && isset($variables['element']['#type']) && $variables['element']['#type'] === 'form') {
-    $original_theme_hook = $variables['theme_hook_original'];
+function draft_theme_theme_suggestions_form_alter(array &$suggestions, array $variables) {
+  $suggestions[] = 'form__' . str_replace('-', '_', $variables['element']['#form_id']);
+}
 
-    $suggestions[] = $original_theme_hook . '__' . str_replace('-', '_', $variables['element']['#id']);
+/**
+ * Implements hook_theme_suggestions_HOOK_alter() for form_element().
+ */
+function draft_theme_theme_suggestions_form_element_alter(array &$suggestions, array $variables) {
+  $suggestions[] = 'form_element__' . str_replace('-', '_', $variables['element']['#type']);
+}
+
+/**
+ * Utility function to get the url of the media image.
+ *
+ * @param \Drupal\Core\Entity\ContentEntityInterface $entity
+ *   Entity containing the image field.
+ * @param string $field_media
+ *   Name of the media field to use.
+ * @param string $field_image_name
+ *   Name of the media's image field to use.
+ * @param string $image_style
+ *   Name of the image style to use.
+ *
+ * @return string
+ *   A string containing an absolute URL.
+ */
+function draft_get_entity_image_url(ContentEntityInterface $entity, $field_media, $field_image_name, $image_style) {
+  $output = '';
+
+  // Ensure that field $field_name exists and not empty.
+  if (!$entity->hasField($field_media) || $entity->get($field_media)->isEmpty()) {
+    return $output;
   }
 
-  return $suggestions;
+  // Ensure that media entity exists.
+  if (!($media_entity = $entity->get($field_media)->entity)) {
+    return $output;
+  }
+
+  // Ensure that $field_image_name exists and not empty.
+  if (!$media_entity->hasField($field_image_name) || $media_entity->get($field_image_name)->isEmpty()) {
+    return $output;
+  }
+
+  // Ensure that file entity exists.
+  if (!($file_entity = $media_entity->get($field_image_name)->entity)) {
+    return $output;
+  }
+
+  return draft_get_image_style_url($file_entity, $image_style);
 }
 
 /**
- * Implements hook_theme_suggestions_form_element().
- */
-function draft_theme_suggestions_form_element(array $variables) {
-  $suggestions = ['form_element__type__' . $variables['element']['#type']];
-
-  return $suggestions;
-}
-
-/**
- * Implements hook_preprocess_views_view_unformatted().
+ * Get the url for a specific image style of an image file.
  *
+ * @param \Drupal\file\FileInterface $file
+ *   Image to be used.
+ * @param string $image_style_name
+ *   Name of the image style to use.
+ *
+ * @return string
+ *   A string containing an absolute URL.
  */
-function draft_theme_preprocess_views_view_unformatted(&$variables) {
-//  Example: How set class for row.
-//  if (($node = \Drupal::routeMatch()->getParameter('node')) && $node->bundle() === 'page') {
-//    $variables['row_class'] = 'small-6';
-//  }
-
+function draft_get_image_style_url(FileInterface $file, $image_style_name) {
+  $uri = $file->getFileUri();
+  if ($image_style = ImageStyle::load($image_style_name)) {
+    $url = $image_style->buildUrl($uri);
+  }
+  else {
+    $url = file_create_url($uri);
+  }
+  return $url;
 }
 

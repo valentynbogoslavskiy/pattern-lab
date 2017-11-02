@@ -1,0 +1,20 @@
+////
+/// Framework - Color
+////
+
+$foundation-palette: () !default;
+$colors: () !default;
+
+/// Get a color from the color map
+/// @param {String} $name - the color name
+/// @param {String} $shade [default] - the version of the color
+@function color($name, $shade: default) {
+  $color: null;
+
+  @if (map-has-key($colors, $name)) {
+    @return key($colors, $name, $shade);
+  } @else {
+    @warn "#{$name} does not exist in $colors.";
+    @return null;
+  }
+}

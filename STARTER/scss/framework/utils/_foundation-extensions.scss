@@ -1,0 +1,131 @@
+////
+/// Mixins and functions that extend foundation default functionality
+/// @group foundation-extensions
+////
+
+
+/// Sizes DIRECT child elements so that `$n` number of items appear on each row.
+/// @param {Number} $n - Number of elements to display per row.
+/// @param {String} $selector ['.column'] - Selector(s) to use for child elements.
+@mixin grid-layout-child(
+  $n,
+  $selector: '.column'
+) {
+  > #{$selector} {
+    width: percentage(1 / $n);
+    float: $global-left;
+
+    &:nth-of-type(1n) {
+      clear: none;
+    }
+
+    &:nth-of-type(#{$n}n+1) {
+      clear: both;
+    }
+
+    &:last-child {
+      float: left;
+    }
+  }
+}
+
+
+/// This block grid variation only applies styles to DIRECT children, which is generally the intended effect.
+/// @param {Number} $number [1] - Number of items to display per row
+/// @param {String} $selector ['.column'] - The css selector to use as the child selector
+/// @param {Number} $bottom-gutter [15] - The number of pixels for the bottom margin of each item
+/// @param {String} $gutter [30px] - Gutter size in pixels
+/// @param {String} $behavior [nest] - Takes options 'nest' or 'collapse' or 'null', can take both 'nest collapse'
+@mixin block-grid($number: 1, $selector: '.column', $bottom-gutter: 15, $gutter: 30px, $behavior: nest) {
+  > #{$selector} {
+    @include grid-column($gutter: $gutter);
+    margin-bottom: #{$bottom-gutter}px;
+    &:last-child {
+      @include grid-column-end;
+    }
+  }
+  @include grid-row($behavior: $behavior, $gutter: $gutter);
+  @include grid-layout-child($number, $selector);
+
+  @if ($behavior == nest) {
+    $margin: rem-calc($gutter) / 2 * -1;
+    margin: 0 $margin;
+  }
+}
+
+
+/// Flex Grid - Implements a block grid on DIRECT child elements so that `$n` number of items appear on each row.
+/// @param {Number} $n - Number of elements to display per row.
+/// @param {String} $grid-item-selector ['.field--item'] - Selector(s) to use for child elements.
+/// @param {String} $gutter [30px] - Side gutter value
+/// @param {String} $bottom-gutter [30px] - Bottom gutter value
+@mixin flex-block-grid($n: 1, $grid-item-selector: '.field--item', $gutter: 30px, $bottom-gutter: 30px) {
+  @include flex-grid-row(nest);
+  @include flex-grid-layout($n, $grid-item-selector);
+  margin: 0 -#{$gutter / 2};
+  & > #{$grid-item-selector} {
+    margin-top: $bottom-gutter;
+    padding: 0 #{$gutter / 2};
+    @for $i from 1 through $n {
+      &:nth-child(#{$i}) {
+        margin-top: 0;
+      }
+    }
+  }
+}
+
+
+/// Header style mixin - This mixin includes the responsive header sizes set in _settings.scss. Those are the default
+/// sizes for headers, but you can use this mixin when you want to apply the default header sizes with breakpoints to
+/// other elements.
+/// @param {String} $h - The header element to get sizes for (h1, h2 ...)
+@mixin font-size($h, $all-styles: true) {
+  @each $size, $headers in $header-styles {
+    @include breakpoint($size) {
+      $font-size-temp: 1rem;
+      $header-defs: map-get($headers, $h);
+
+      @if (map_has_key($header-defs, 'font-size')) {
+        $font-size-temp: rem-calc(map-get($header-defs, 'font-size'));
+        font-size: $font-size-temp;
+      } @else if (map_has_key($header-defs, 'fs')) {
+        $font-size-temp: rem-calc(map-get($header-defs, 'fs'));
+        font-size: $font-size-temp;
+      } @else {
+        @warn 'there is no such key of rule in $header-styles';
+      }
+
+      @if ($all-styles) {
+        @if map-has-key($header-defs, font-weight) {
+          $font-weight-temp: map-get($header-defs, fw);
+          font-weight: $font-weight-temp;
+        } @else if map-has-key($header-defs, 'fw') {
+          $font-weight-temp: map-get($header-defs, 'fw');
+          font-weight: $font-weight-temp;
+        }
+        @if map-has-key($header-defs, line-height) {
+          line-height: unitless-calc(map-get($header-defs, line-height), $font-size-temp);
+        } @else if map-has-key($header-defs, lh) {
+          line-height: unitless-calc(map-get($header-defs, lh), $font-size-temp);
+        } @else if $size == $-zf-zero-breakpoint {
+          line-height: unitless-calc($header-lineheight, $font-size-temp);
+        }
+
+        @if map-has-key($header-defs, margin-top) {
+          margin-top: rem-calc(map-get($header-defs, margin-top));
+        } @else if map-has-key($header-defs, mt) {
+          margin-top: rem-calc(map-get($header-defs, mt));
+        } @else if $size == $-zf-zero-breakpoint {
+          margin-top: 0;
+        }
+        @if map-has-key($header-defs, margin-bottom) {
+          margin-bottom: rem-calc(map-get($header-defs, margin-bottom));
+        } @else if map-has-key($header-defs, mb) {
+          margin-bottom: rem-calc(map-get($header-defs, mb));
+        } @else if $size == $-zf-zero-breakpoint {
+          margin-bottom: rem-calc($header-margin-bottom);
+        }
+      }
+    }
+  }
+}
