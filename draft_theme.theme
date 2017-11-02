@@ -90,4 +90,3 @@ function draft_get_image_style_url(FileInterface $file, $image_style_name) {
   }
   return $url;
 }
-
