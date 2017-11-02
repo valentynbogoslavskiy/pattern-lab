@@ -5,6 +5,7 @@
  * Functions to support theming in the Draft theme.
  */
 
+use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\file\FileInterface;
 use Drupal\image\Entity\ImageStyle;
 
@@ -25,10 +26,10 @@ function draft_theme_theme_suggestions_form_element_alter(array &$suggestions, a
 /**
  * Utility function to get the url of the media image.
  *
- * @param Drupal\Core\Entity\ContentEntityInterface $entity
+ * @param \Drupal\Core\Entity\ContentEntityInterface $entity
  *   Entity containing the image field.
  * @param string $field_media
- *   Name of the image field to use.
+ *   Name of the media field to use.
  * @param string $field_image_name
  *   Name of the media's image field to use.
  * @param string $image_style
@@ -37,7 +38,7 @@ function draft_theme_theme_suggestions_form_element_alter(array &$suggestions, a
  * @return string
  *   A string containing an absolute URL.
  */
-function draft_get_entity_image_url($entity, $field_media, $field_image_name = 'field_image', $image_style) {
+function draft_get_entity_image_url(ContentEntityInterface $entity, $field_media, $field_image_name, $image_style) {
   $output = '';
 
   // Ensure that field $field_name exists and not empty.
@@ -64,7 +65,7 @@ function draft_get_entity_image_url($entity, $field_media, $field_image_name = '
 }
 
 /**
- * Get the url for a specific image style of an image.
+ * Get the url for a specific image style of an image file.
  *
  * @param \Drupal\file\FileInterface $file
  *   Image to be used.
