@@ -7,7 +7,7 @@
     "url": "git://github.com/lemberg/draft-theme.git"
   },
   "bugs": "https://github.com/lemberg/draft-theme/issues",
-  "version": "1.0.0-alpha",
+  "version": "1.0.0-beta1",
   "license": "MIT",
   "scripts": {
     "test": "node ./node_modules/gulp/bin/gulp.js test || exit 0",
