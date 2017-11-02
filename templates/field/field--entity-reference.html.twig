@@ -1,8 +1,7 @@
-{% extends "field--entity-reference.html.twig" %}
 {#
 /**
  * @file
- * Draft's theme implementation for a field entity reference revisions.
+ * Draft's theme implementation for a field entity reference.
  *
  * To override output, copy the "field.html.twig" from the templates directory
  * to your theme's directory and customize it, just like customizing other
@@ -38,4 +37,17 @@
  * @see template_preprocess_field()
  */
 #}
+{%
+  set classes = [
+    'field',
+    'field--name-' ~ field_name|clean_class,
+    'field--type-' ~ field_type|clean_class,
+    'field--label-' ~ label_display,
+  ]
+%}
 
+<div{{ attributes.addClass(classes) }}>
+  {% for item in items %}
+    {{ item.content }}
+  {% endfor %}
+</div>

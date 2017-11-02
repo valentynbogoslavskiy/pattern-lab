@@ -9,37 +9,17 @@ use Drupal\file\FileInterface;
 use Drupal\image\Entity\ImageStyle;
 
 /**
- * Implements hook_theme_suggestions_alter
+ * Implements hook_theme_suggestions_HOOK_alter() for form().
  */
-function draft_theme_theme_suggestions_alter(array &$suggestions, array $variables) {
-  if (isset($variables['element']) && isset($variables['element']['#type']) && $variables['element']['#type'] === 'form') {
-    $original_theme_hook = $variables['theme_hook_original'];
-
-    $suggestions[] = $original_theme_hook . '__' . str_replace('-', '_', $variables['element']['#id']);
-  }
-
-  return $suggestions;
+function draft_theme_theme_suggestions_form_alter(array &$suggestions, array $variables) {
+  $suggestions[] = 'form__' . str_replace('-', '_', $variables['element']['#form_id']);
 }
 
 /**
- * Implements hook_theme_suggestions_form_element().
+ * Implements hook_theme_suggestions_HOOK_alter() for form_element().
  */
-function draft_theme_suggestions_form_element(array $variables) {
-  $suggestions = ['form_element__type__' . $variables['element']['#type']];
-
-  return $suggestions;
-}
-
-/**
- * Implements hook_preprocess_views_view_unformatted().
- *
- */
-function draft_theme_preprocess_views_view_unformatted(&$variables) {
-//  Example: How set class for row.
-//  if (($node = \Drupal::routeMatch()->getParameter('node')) && $node->bundle() === 'page') {
-//    $variables['row_class'] = 'small-6';
-//  }
-
+function draft_theme_theme_suggestions_form_element_alter(array &$suggestions, array $variables) {
+  $suggestions[] = 'form_element__' . str_replace('-', '_', $variables['element']['#type']);
 }
 
 /**

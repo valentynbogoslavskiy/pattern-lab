@@ -1,7 +1,7 @@
 name: Draft theme
 type: theme
 hidden: true
-description: 'Lemberg Draft theme'
+description: 'Draft base theme'
 core: 8.x
 base theme: classy
 

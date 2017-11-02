@@ -1,16 +1,14 @@
 name: STARTER
 type: theme
-description: 'A subtheme of Classy, built for STARTER'
+description: 'Subtheme of Draft'
 core: 8.x
-# Defines the base theme
-base theme: classy
+base theme: draft_theme
 
 ckeditor_stylesheets:
   - css/dist/wysiwyg.css
 
 libraries:
   - STARTER/global
-
 
 libraries-override:
   classy/base:
@@ -22,5 +20,4 @@ regions:
   header: Header
   highlighted: Highlighted
   content: Content
-  sidebar: Sidebar
   footer: Footer
