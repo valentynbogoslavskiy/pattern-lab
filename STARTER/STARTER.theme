@@ -2,5 +2,5 @@
 
 /**
  * @file
- * STARTER Drupal 8 theme based on Draft theme.
+ * Functions to support theming in the STARTER theme.
  */
