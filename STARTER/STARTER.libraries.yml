@@ -1,3 +1,10 @@
+admin:
+  css:
+    theme:
+      css/admin.css: {}
+  js:
+    js/dist/admin.js: {}
+
 global:
   version: VERSION
   css:

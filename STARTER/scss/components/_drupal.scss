@@ -1,0 +1,502 @@
+////
+/// Drupal default stuff
+/// @group Drupal
+/// @see $tabs-config
+////
+
+
+// The skip-link link will be completely hidden until a user tabs to the link.
+// See the element-focusable rule in system.base.css.
+[id='skip-link'] {
+  margin: 0;
+
+  a {
+    &, &:visited {
+      display: block;
+      width: 100%;
+      padding: 2px 0 3px;
+      text-align: center;
+      background-color: #666;
+      color: #fff;
+    }
+  }
+}
+
+// Styling for Drupal admin tabs.
+ul.primary {
+  font-size: 14px;
+  margin: 0 auto;
+  padding: 0;
+  overflow: hidden;
+  position: relative;
+  z-index: 2;
+  background: key($drupal-tabs, wrap, background);
+  border-bottom: 1px solid key($drupal-tabs, wrap, border);
+  @include container;
+
+  li {
+    list-style: none;
+    float: left;
+    margin-bottom: 0;
+
+    a {
+      padding: 8px 18px;
+      background: key($drupal-tabs, link, background);
+      border-top: 5px solid #ffd204;
+      display: block;
+      color: key($drupal-tabs, link, color);
+      font-weight: normal;
+      text-decoration: none;
+
+      &:hover, &:active {
+        background: key($drupal-tabs, link, hover-background);
+        color: key($drupal-tabs, link, hover-color);
+      }
+    }
+  }
+
+  $alt-colors: key($drupal-tabs, alt-colors);
+
+  @for $i from 1 through length($alt-colors) {
+
+    li:nth-child(#{length($alt-colors)}n + #{$i}) {
+
+      a {
+        border-top: 5px solid nth($alt-colors, $i);
+
+        &:hover,
+        &:active {
+          background: nth($alt-colors, $i);
+          color: #fff;
+        }
+      }
+    }
+  }
+
+  @include breakpoint(small down) {
+    padding: 0;
+    display: flex;
+
+    li {
+      margin: 0;
+      flex-grow: 1;
+
+      a {
+        padding: 8px 10px;
+        text-align: center;
+      }
+    }
+  }
+  @include breakpoint(medium) {
+    font-size: 16px;
+  }
+}
+
+// Custom styles for Drupal's notification messages.
+.messages {
+  color: $body-font-color;
+  margin: 6px 0;
+  padding: 8px 10px;
+  position: relative;
+  text-align: left;
+  align-items: center;
+  background-image: none;
+  font-size: rem-calc(16);
+  //display: flex;
+  display: none;
+
+  &:before {
+    @extend %icon-base;
+    font-size: 26px;
+    margin-right: 10px;
+  }
+}
+
+.messages--ok,
+.messages--status {
+  color: darken($statusokbg, 10%);
+  border-color: lighten($statusokbg, 50%);
+
+  a {
+    color: lighten($statusokbg, 50%);
+  }
+}
+
+.messages--status {
+  &:before {
+    @include icon(check_circle, true);
+    color: #81b564;
+  }
+}
+
+.messages--ok {
+  &:before {
+    @include icon(info, true);
+    color: #81b564;
+  }
+}
+
+.messages--warning {
+  &:before {
+    @include icon(info);
+    color: #e2be6c;
+  }
+}
+
+.messages--error {
+  background-color: $errorbg;
+  border-color: darken($errorbg, 10%);
+  color: #fff;
+
+  a {
+    color: lighten($errorbg, 50%);
+  }
+
+  &:before {
+    @include icon(error);
+  }
+}
+
+.messages ul {
+  list-style: none;
+  margin: 0; /* LTR */
+  padding: 0;
+}
+.messages ul li {
+  border-bottom: 1px solid #fff;
+  list-style-image: none;
+  margin-bottom: 4px;
+  padding-bottom: 5px;
+
+  &:last-child {
+    border-bottom: 0;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+}
+// Fix some styles in Krumo
+.krumo-element,
+.krumo-footnote,
+.krumo-call,
+.krumo-preview {
+  color: #231f20;
+}
+
+/**
+ * jQuery toast plugin created by Kamran Ahmed copyright MIT license 2014
+ */
+.jq-toast-wrap {
+  display: block;
+  position: fixed;
+  width: 320px;
+  max-width: 50vw;
+  pointer-events: none;
+  margin: 0;
+  padding: 0;
+  letter-spacing: normal;
+  z-index: z(fixed);
+
+  @include breakpoint(small down) {
+    right: 10px;
+    left: 10px;
+    width: auto;
+    max-width: none;
+    max-height: 70vh;
+
+    &.top {
+      &-right {
+        top: auto;
+        bottom: 10px;
+      }
+    }
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+  }
+
+  &.bottom {
+    &-left {
+      bottom: 20px;
+      left: 20px;
+    }
+    &-right {
+      bottom: 20px;
+      right: 40px;
+    }
+  }
+
+  @include breakpoint(medium) {
+    &.top {
+      &-left {
+        top: 20px;
+        left: 20px;
+      }
+      &-right {
+        top: 90px;
+        right: 20px;
+
+        body.adminimal-admin-toolbar & {
+          top: 130px;
+        }
+        body.adminimal-admin-toolbar.toolbar-horizontal.toolbar-tray-open & {
+          top: 170px;
+        }
+      }
+    }
+  }
+}
+
+
+.jq-toast-single {
+  display: block;
+  width: 100%;
+  padding: 10px 15px;
+  margin: 0 0 5px;
+  border-radius: 2px;
+  font-size: rem-calc(12);
+  font-weight: $global-weight-light;
+  position: relative;
+  pointer-events: all;
+  background-color: $gray-darker;
+  box-shadow: 0 2px 4px 1px rgba($black, .3);
+  color: $white;
+
+  h2 {
+    font-family: $header-font-family;
+    font-size: rem-calc(14);
+    margin: 0 0 7px;
+    background: none;
+    color: $white;
+    line-height: inherit;
+    letter-spacing: normal;
+  }
+
+  a {
+    color: $white;
+    text-decoration: none;
+    font-weight: $global-weight-bold;
+    border-bottom: 1px solid $white;
+
+    @include selectors(active) {
+      border-bottom: 1px solid transparent;
+    }
+  }
+
+  ul {
+    margin: 0 0 0 15px;
+    background: none;
+    padding: 0;
+
+    li {
+      list-style-type: disc;
+      line-height: rem-calc(18);
+      background: none;
+      margin: 0;
+      padding: 0;
+      letter-spacing: normal;
+    }
+  }
+}
+
+.close-jq-toast-single {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  font-size: rem-calc(24);
+  width: rem-calc(24);
+  cursor: pointer;
+  line-height: 1;
+  text-align: center;
+
+  @include selectors(active) {
+    color: $white;
+  }
+}
+
+.jq-toast-loader {
+  display: block;
+  position: absolute;
+  top: -2px;
+  height: 5px;
+  width: 0;
+  left: 0;
+  border-radius: 5px;
+  background: #f00;
+}
+
+.jq-toast-loaded {
+  width: 100%;
+}
+
+.jq-has-icon {
+  position: relative;
+
+  .jq-toast-heading {
+    padding-left: 26px;
+    padding-top: 2px;
+  }
+
+  @include icon-before('info') {
+    position: absolute;
+    display: block;
+    color: $white;
+    top: 8px;
+    left: 12px;
+    font-size: rem-calc(22);
+  }
+}
+
+.jq-icon-info {
+  color: lighten(#31708f, 52%);
+  background-color: #31708f;
+}
+
+.jq-icon-warning {
+  color: lighten($warningbg, 52%);
+  background-color: $warningbg;
+
+  &:before {
+    @include icon('info');
+  }
+}
+
+.jq-icon-error {
+  color: lighten($errorbg, 52%);
+  background-color: $errorbg;
+
+  &:before {
+    @include icon('error');
+  }
+}
+
+.jq-icon-success {
+  color: lighten($statusokbg, 52%);
+  background-color: $statusokbg;
+
+  &:before {
+    @include icon('check_circle');
+  }
+}
+
+
+////
+/// Replace Drupal Ajax Throbber
+///
+/// The following snippet replaces the default ajax throbber with a custom svg element and rotation.
+/// The fallback replaces the Drupal gif with a less ugly custom gif. Only the throbber element has
+/// been modified here, so it will still have the default behavior of appearing inline and default
+/// size, etc. Size can be altered easily below.
+///
+/// Color of svg spinner can easily be changed in the loader.svg file, or completely replace
+/// with an alternative.
+///
+/// Relies on modernizr cssanimations test.
+/// @group Animations
+////
+.cssanimations .ajax-progress.ajax-progress-fullscreen {
+  height: 44px;
+  width: 44px;
+  top: 50%;
+  left: 50%;
+  margin-top: -22px;
+  margin-left: -22px;
+  background: $white;
+  z-index: z(ajax-throbber);
+  opacity: .9;
+  border: 2px solid $primary-color;
+  &:before {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 40px;
+    height: 40px;
+    background: url('../../images/svg/loader.svg');
+    @include bg-style(contain);
+    animation: rotate 700ms linear infinite normal;
+  }
+}
+
+.no-cssanimations .ajax-progress.ajax-progress-fullscreen {
+  background: url('../../images/gif-loader.gif');
+  @include bg-style(contain);
+}
+
+
+
+// Content Moderation
+.content-moderation-entity-moderation-form {
+  @include container;
+  margin-top: 2rem;
+
+  ul.entity-moderation-form {
+    align-items: flex-start;
+    justify-content: flex-start;
+    margin: 0;
+    background: #efefef;
+    border-bottom: 0;
+
+    .form-item {
+      label {
+        border-bottom: 1px solid $black;
+      }
+
+      input,
+      select {
+        margin-top: .5rem;
+        margin-bottom: 0;
+      }
+    }
+
+    .form-submit {
+      box-sizing: border-box;
+      display: inline-block;
+      position: relative;
+      text-align: center;
+      line-height: normal;
+      cursor: pointer;
+      padding: 4px 1.5em;
+      border: 1px solid #0071b8;
+      text-decoration: none;
+      font-size: 14px;
+      margin-top: 1.75rem;
+      margin-bottom: 0;
+      color: #fff;
+      font-weight: 700;
+      background-image: none;
+      text-shadow: none;
+      background: #0071b8;
+
+      &:hover {
+        background-image: none;
+        background-color: #1f86c7;
+        border-color: #1f86c7;
+        box-shadow: 0 1px 2px hsla(203, 10%, 10%, .25);
+      }
+    }
+
+    li {
+      padding-left: 2rem;
+      &:last-child {
+        align-self: center;
+      }
+    }
+  }
+}
+
+.region-content {
+  .diff-header,
+  .diff-controls,
+  .diffmod.entity-moderation-form {
+    @include container;
+  }
+
+  .diff-responsive-table-wrapper {
+    h2 {
+      @include container;
+    }
+  }
+}

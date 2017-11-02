@@ -1,0 +1,84 @@
+.slick-slider {
+  position: relative;
+
+  @include breakpoint(medium down) {
+    max-width: 80%;
+    margin: 0 auto;
+    padding: 20px 0 40px;
+  }
+
+  @include breakpoint(large) {
+    padding: 25px 45px 80px;
+  }
+  @include breakpoint(xlarge) {
+    padding-left: 85px;
+    padding-right: 85px;
+  }
+
+  .slick-list {
+    overflow: hidden;
+    user-select: none;
+  }
+  .slick-track {
+    display: flex;
+    align-items: center;
+  }
+  .slick-slide {
+    border: 0;
+    outline: none;
+  }
+
+  .slick-arrow {
+    @include vertical-center;
+    z-index: z(above);
+
+    &.slick-disabled {
+      pointer-events: none;
+      opacity: .7;
+    }
+  }
+
+  .slick-dots {
+    margin: 0;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    list-style: none;
+    width: 100%;
+    justify-content: center;
+
+    li {
+      display: block;
+      padding: 0 5px;
+
+      @include breakpoint(medium) {
+        padding: 0 10px;
+      }
+
+      button {
+        @include text-hide;
+        @include circle(8px);
+        background-color: rgba($white, .25);
+        transition: background-color .3s linear;
+        display: block;
+
+        @include selectors(active) {
+          outline: none;
+          cursor: pointer;
+          background-color: rgba($white, .75);
+        }
+
+        @include breakpoint(medium) {
+          @include square(14px);
+        }
+      }
+
+      &.slick-active {
+        button {
+          background-color: $white;
+        }
+      }
+    }
+  }
+}

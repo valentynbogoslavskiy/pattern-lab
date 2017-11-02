@@ -1,2 +1,24 @@
 // Add foundation first so foundation utilities can be used everywhere
 @import 'foundation';
+
+@import 'framework/utils/utils';
+@import 'framework/buttons';
+@import 'framework/layout';
+@import 'framework/links';
+@import 'framework/custom-styles';
+
+@import 'base/icons';
+@import 'base/settings';
+@import 'base/config';
+@import 'base/app';
+@import 'base/typography';
+
+@import 'regions/header';
+@import 'regions/footer';
+
+@import 'components/drupal';
+@import 'components/navigation';
+@import 'components/layout';
+@import 'components/form-elements';
+@import 'components/custom-blocks';
+@import 'components/slick';

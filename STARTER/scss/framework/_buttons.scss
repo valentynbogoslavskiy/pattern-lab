@@ -1,0 +1,74 @@
+////
+/// Framework - Buttons
+////
+
+
+$buttons: (
+  default: (
+    background: #777,
+    color: #fff,
+    border: #ccc,
+    hover-background: #555,
+    hover-color: #fff,
+    hover-border: #ccc,
+    active-background: #555,
+  )
+) !default;
+
+
+@mixin btn($button-key, $size: default, $is-outline: false) {
+  $button: extend-in-map($buttons, $button-key);
+
+  @include disable-mouse-outline;
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  line-height: 1;
+  font-family: $body-font-family;
+  text-align: center;
+  text-transform: uppercase;
+  appearance: none;
+  border: 0;
+  border-radius: 0;
+
+  @if $is-outline {
+    background-color: transparent;
+    box-shadow: inset 0 0 0 1px key($button, background);
+    color: key($button, background);
+    font-weight: 500;
+  } @else {
+    color: key($button, color);
+    background-color: key($button, background);
+    font-weight: $global-weight-normal;
+  }
+
+  @if ($size == small) {
+    padding: 8px 12px;
+    font-size: 14px;
+  } @else if ($size == default) {
+    padding: rem-calc(20) rem-calc($global-padding * 2);
+    font-size: rem-calc(18);
+  } @else if ($size == large) {
+    padding: rem-calc(24) rem-calc($global-padding * 2);
+    font-size: rem-calc(24);
+  }
+
+  transition-property: background-color, color;
+  transition-duration: .3s;
+  transition-timing-function: ease;
+
+  @include selectors(active) {
+    outline: none;
+    cursor: pointer;
+    color: key($button, hover-color);
+    @if $is-outline {
+      @if $button-key == 'white' {
+        color: key($button, color);
+      }
+      background-color: key($button, background);
+    } @else {
+      background-color: key($button, hover-background);
+    }
+  }
+}
+

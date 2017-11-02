@@ -1,0 +1,12 @@
+////
+/// Framework - Custom Style Patterns
+////
+
+// Main Nav Style
+@mixin main-nav-style($color) {
+  display: block;
+  color: $color;
+  padding: rem-calc(5) 0;
+  border-bottom: 1px solid transparent;
+  font-size: rem-calc(14);
+}

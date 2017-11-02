@@ -1,0 +1,27 @@
+ul.menu {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  .menu-item {
+    padding: 0;
+
+    a {
+      color: $white;
+    }
+  }
+}
+
+.menu--main {
+  .menu-level-0 {
+    > .menu-item {
+      position: relative;
+      display: inline-block;
+      margin: 0 10px;
+    }
+  }
+
+  .menu-level-1 {
+    display: block;
+  }
+}

@@ -1,0 +1,72 @@
+////
+/// General theme configuration.
+/// @group Configuration
+////
+
+/// Configuration for Drupal Admin tabs.
+$drupal-tabs: (
+  wrap: (
+    background: #fafafa,
+    border: #efefef
+  ),
+  link: (
+    color: #251923,
+    background: #efefef,
+    hover-color: #fff,
+    hover-background: #251923
+  ),
+  alt-colors: #b6c4c5 #575642 #4c4650 #251923
+);
+
+/// z-index organization.
+/// See links below for more information.
+///
+/// @link https://css-tricks.com/handling-z-index/
+/// @link http://www.sitepoint.com/using-sass-maps/
+$z-layers: (
+  skip-link: 8000,
+  ajax-throbber: 7000,
+  debug: 1000,
+  default: 0,
+  bottomless-pit: -9999,
+  fixed: 500,
+  above: 1,
+  under: -1,
+
+  // example nested z-index.
+  example: (
+    default: 100,
+    image: -2
+  )
+);
+
+/// Button config
+$buttons: (
+  _base: (
+    color: $white,
+    border: 0,
+    hover-background: $gray-default,
+    hover-color: $white,
+  ),
+  primary: (
+    extend: _base,
+    background: $primary-color,
+  ),
+  secondary: (
+    extend: _base,
+    background: $secondary-color,
+  ),
+  tertiary: (
+    extend: _base,
+    background: $tertiary-color,
+  ),
+  'white': (
+    extend: _base,
+    color: #4a4a4a,
+    background: $white,
+  ),
+  'dark': (
+    extend: _base,
+    background: $gray-dark,
+  ),
+);
