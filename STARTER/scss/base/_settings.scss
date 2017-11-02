@@ -91,13 +91,13 @@ $black: #000;
 $white: #fff;
 
 $global-font-size: 100%;
-$global-letter-spacing: 1.73px;
+$global-letter-spacing: rem-calc(1.73);
 $global-width: rem-calc(1200);
 $global-lineheight: 1.5;
 
 $body-background: $white;
 $body-font-color: $font-color-default;
-$body-font-family: 'Montserrat', sans-serif;
+$body-font-family: 'Arial', sans-serif;
 $body-antialiased: true;
 $global-margin: 1rem;
 $global-padding: 1rem;
@@ -154,7 +154,7 @@ $block-grid-max: 8;
 // 4. Base Typography
 // ------------------
 
-$header-font-family: 'Montserrat Alternates', sans-serif;
+$header-font-family: 'Arial', sans-serif;
 $header-font-weight: $global-weight-normal;
 $header-font-style: normal;
 $font-family-monospace: Consolas, 'Liberation Mono', Courier, monospace;

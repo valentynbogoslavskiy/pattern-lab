@@ -79,18 +79,52 @@
 /// sizes for headers, but you can use this mixin when you want to apply the default header sizes with breakpoints to
 /// other elements.
 /// @param {String} $h - The header element to get sizes for (h1, h2 ...)
-@mixin font-size($h, $with-line-height: true) {
-  @if ($with-line-height == true) {
-    line-height: $header-lineheight;
-  }
+@mixin font-size($h, $all-styles: true) {
   @each $size, $headers in $header-styles {
     @include breakpoint($size) {
-      @if (map_has_key(map-get($headers, $h), 'font-size')) {
-        font-size: rem-calc(map-get(map-get($headers, $h), 'font-size'));
-      } @else if (map_has_key(map-get($headers, $h), 'fs')) {
-        font-size: rem-calc(map-get(map-get($headers, $h), 'fs'));
+      $font-size-temp: 1rem;
+      $header-defs: map-get($headers, $h);
+
+      @if (map_has_key($header-defs, 'font-size')) {
+        $font-size-temp: rem-calc(map-get($header-defs, 'font-size'));
+        font-size: $font-size-temp;
+      } @else if (map_has_key($header-defs, 'fs')) {
+        $font-size-temp: rem-calc(map-get($header-defs, 'fs'));
+        font-size: $font-size-temp;
       } @else {
         @warn 'there is no such key of rule in $header-styles';
+      }
+
+      @if ($all-styles) {
+        @if map-has-key($header-defs, font-weight) {
+          $font-weight-temp: map-get($header-defs, fw);
+          font-weight: $font-weight-temp;
+        } @else if map-has-key($header-defs, 'fw') {
+          $font-weight-temp: map-get($header-defs, 'fw');
+          font-weight: $font-weight-temp;
+        }
+        @if map-has-key($header-defs, line-height) {
+          line-height: unitless-calc(map-get($header-defs, line-height), $font-size-temp);
+        } @else if map-has-key($header-defs, lh) {
+          line-height: unitless-calc(map-get($header-defs, lh), $font-size-temp);
+        } @else if $size == $-zf-zero-breakpoint {
+          line-height: unitless-calc($header-lineheight, $font-size-temp);
+        }
+
+        @if map-has-key($header-defs, margin-top) {
+          margin-top: rem-calc(map-get($header-defs, margin-top));
+        } @else if map-has-key($header-defs, mt) {
+          margin-top: rem-calc(map-get($header-defs, mt));
+        } @else if $size == $-zf-zero-breakpoint {
+          margin-top: 0;
+        }
+        @if map-has-key($header-defs, margin-bottom) {
+          margin-bottom: rem-calc(map-get($header-defs, margin-bottom));
+        } @else if map-has-key($header-defs, mb) {
+          margin-bottom: rem-calc(map-get($header-defs, mb));
+        } @else if $size == $-zf-zero-breakpoint {
+          margin-bottom: rem-calc($header-margin-bottom);
+        }
       }
     }
   }
