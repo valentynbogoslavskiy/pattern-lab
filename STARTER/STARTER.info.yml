@@ -20,5 +20,4 @@ regions:
   header: Header
   highlighted: Highlighted
   content: Content
-  sidebar: Sidebar
   footer: Footer
