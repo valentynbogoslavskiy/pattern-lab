@@ -9,21 +9,8 @@ use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\file\FileInterface;
 use Drupal\image\Entity\ImageStyle;
 
-require_once 'preprocess/form.inc';
-
-/**
- * Implements hook_theme_suggestions_HOOK_alter() for form().
- */
-function draft_theme_theme_suggestions_form_alter(array &$suggestions, array $variables) {
-  $suggestions[] = 'form__' . str_replace('-', '_', $variables['element']['#form_id']);
-}
-
-/**
- * Implements hook_theme_suggestions_HOOK_alter() for form_element().
- */
-function draft_theme_theme_suggestions_form_element_alter(array &$suggestions, array $variables) {
-  $suggestions[] = 'form_element__' . str_replace('-', '_', $variables['element']['#type']);
-}
+require_once 'includes/preprocess/form.inc';
+require_once 'includes/suggestions.inc';
 
 /**
  * Utility function to get the url of the media image.
