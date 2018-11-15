@@ -6,13 +6,13 @@
  */
 
 // Dependencies
-@import '../_vendor/normalize-scss/sass/normalize';
-@import '../_vendor/sassy-lists/stylesheets/helpers/missing-dependencies';
-@import '../_vendor/sassy-lists/stylesheets/helpers/true';
-@import '../_vendor/sassy-lists/stylesheets/functions/purge';
-@import '../_vendor/sassy-lists/stylesheets/functions/remove';
-@import '../_vendor/sassy-lists/stylesheets/functions/replace';
-@import '../_vendor/sassy-lists/stylesheets/functions/to-list';
+//@import '../_vendor/normalize-scss/sass/normalize';
+//@import '../_vendor/sassy-lists/stylesheets/helpers/missing-dependencies';
+//@import '../_vendor/sassy-lists/stylesheets/helpers/true';
+//@import '../_vendor/sassy-lists/stylesheets/functions/purge';
+//@import '../_vendor/sassy-lists/stylesheets/functions/remove';
+//@import '../_vendor/sassy-lists/stylesheets/functions/replace';
+//@import '../_vendor/sassy-lists/stylesheets/functions/to-list';
 
 // Sass utilities
 //@import 'util/util';
@@ -114,7 +114,7 @@
 
 // Choose the styles that we actually want PRINTED into our stylesheets
 @include foundation-global-styles;
-@include foundation-typography;
+//@include foundation-typography;
 
 //@include foundation-forms;
 @include foundation-form-fieldset;

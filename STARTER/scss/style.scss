@@ -1,4 +1,12 @@
 // Add foundation first so foundation utilities can be used everywhere
+
+a {
+  display: block;
+  visibility: hidden;
+
+
+
+}
 @import 'foundation';
 
 @import 'framework/utils/utils';
@@ -16,9 +24,14 @@
 @import 'regions/header';
 @import 'regions/footer';
 
-@import 'components/drupal';
+//@import 'components/drupal';
 @import 'components/navigation';
 @import 'components/layout';
 @import 'components/form-elements';
 @import 'components/custom-blocks';
 @import 'components/slick';
+p {
+  display: none;
+
+}
+
