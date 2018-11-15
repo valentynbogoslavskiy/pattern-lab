@@ -1,12 +1,4 @@
 // Add foundation first so foundation utilities can be used everywhere
-
-a {
-  display: block;
-  visibility: hidden;
-
-
-
-}
 @import 'foundation';
 
 @import 'framework/utils/utils';
@@ -30,8 +22,3 @@ a {
 @import 'components/form-elements';
 @import 'components/custom-blocks';
 @import 'components/slick';
-p {
-  display: none;
-
-}
-
