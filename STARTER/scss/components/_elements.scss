@@ -44,20 +44,27 @@
   background-color: $statusokbg;
 }
 
-.brand-font-primary {
-  background-color: $font-color-default;
-}
-
-.brand-font-secondary {
-  background-color: $font-color-light;
-}
-
-.brand-font-tertiary {
+.brand-ninth {
   background-color: $font-color-dark;
 }
 
-.brand-font-fourth {
-  background-color: $gray-darker;
+.check-circle-icon {
+  @include icon-after(check_circle);
+}
+.error-icon {
+  @include icon-after(error);
+}
+.info-icon {
+  @include icon-after(info);
+}
+.settings-icon {
+  @include icon-after(settings);
 }
 
 //end
+
+blockquote {
+  padding: 5px 30px;
+  margin-left: 10px;
+  border-left: 4px solid $primary-color;
+}

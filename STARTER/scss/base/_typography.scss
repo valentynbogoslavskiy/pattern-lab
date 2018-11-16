@@ -44,15 +44,8 @@ body {
   }
 }
 
-h1 {
-  color: $white;
-}
 
-h2 {
-  color: $primary-color;
-}
 .h2 {
-  font-family: $body-font-family;
   line-height: 1.1;
 
   p {
@@ -63,16 +56,6 @@ h2 {
   @include breakpoint(small down) {
     font-size: rem-calc(16);
   }
-}
-
-h3 {
-  color: $secondary-color;
-  font-family: $body-font-family;
-}
-
-h6 {
-  text-transform: uppercase;
-  font-family: $body-font-family;
 }
 
 .subheading {

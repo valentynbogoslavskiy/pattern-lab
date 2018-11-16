@@ -102,8 +102,9 @@ ul.primary {
   align-items: center;
   background-image: none;
   font-size: rem-calc(16);
-  //display: flex;
-  display: none;
+  border-width: 1px;
+  border-style: solid;
+  display: flex;
 
   &:before {
     @extend %icon-base;
@@ -116,7 +117,7 @@ ul.primary {
 .messages--status {
   color: darken($statusokbg, 10%);
   border-color: lighten($statusokbg, 50%);
-
+  background-color: lighten($statusokbg, 60%);
   a {
     color: lighten($statusokbg, 50%);
   }
@@ -137,6 +138,8 @@ ul.primary {
 }
 
 .messages--warning {
+  border-color: lighten($warningbg, 50%);
+  background-color: lighten($warningbg, 60%);
   &:before {
     @include icon(info);
     color: #e2be6c;
