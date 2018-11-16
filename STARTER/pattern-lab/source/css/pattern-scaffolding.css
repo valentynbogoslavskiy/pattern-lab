@@ -57,4 +57,5 @@
   color: #333333;
   text-decoration: none;
   outline: 0;
+  text-transform: capitalize;
 }
