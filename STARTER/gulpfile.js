@@ -16,6 +16,7 @@ const sass = require('gulp-sass');
 const sassLint = require('gulp-sass-lint');
 const autoprefixer = require('gulp-autoprefixer');
 const icomoonBuilder = require('gulp-icomoon-builder');
+const cleanCSS = require('gulp-clean-css');
 // JS
 const eslint = require('gulp-eslint');
 
@@ -65,7 +66,9 @@ gulp.task('scss-compile', () => {
     }))
     .pipe(autoprefixer(configs.browsersSupport))
     .pipe(sourcemaps.write())
-    .pipe(gulp.dest('./css/'));
+    .pipe(gulp.dest('./css/'))
+    .pipe(cleanCSS())
+    .pipe(gulp.dest('./pattern-lab/source/css/'));
 });
 
 

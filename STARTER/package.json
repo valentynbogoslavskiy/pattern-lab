@@ -16,7 +16,9 @@
     "lint:scss": "node ./node_modules/gulp/bin/gulp.js scss-lint || exit 0",
     "build:scss": "node ./node_modules/gulp/bin/gulp.js scss-compile || exit 0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "gulp-clean-css": "^3.10.0"
+  },
   "dependencies": {
     "atob": "^2.0.3",
     "babel-core": "6.24.1",
