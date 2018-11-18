@@ -1,0 +1,16 @@
+{
+  "items": [
+    {
+      "name": "check-circle-icon"
+    },
+    {
+      "name": "error-icon"
+    },
+    {
+      "name": "info-icon"
+    },
+    {
+      "name": "settings-icon"
+    }
+  ]
+}

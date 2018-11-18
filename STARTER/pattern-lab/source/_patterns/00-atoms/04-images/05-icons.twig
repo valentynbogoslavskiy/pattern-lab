@@ -1,7 +1,5 @@
 <ul class="icons inline-list">
-	<li class="check-circle-icon"></li>
-	<li class="error-icon"></li>
-	<li class="info-icon"></li>
-	<li class="settings-icon"></li>
-
+	{% for item in items %}
+		<li class="{{ item.name }}"></li>
+	{% endfor %}
 </ul>
